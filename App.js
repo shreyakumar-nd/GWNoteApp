@@ -1,26 +1,44 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, {Component} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Home from './components/Home'
+import Contacts from './components/Contacts'
+import Notes from './components/Notes'
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}> 
+ 
 
-      <View style={styles.header}>
-        <Text style={styles.boldText}>Top Nav Bar</Text>
-      </View>
-
-      <View style={styles.body}>
-        <Text>Body</Text>
-      </View>
-
-      <View style={styles.bottomBar}>
-        <Text>Bottom Nav Bar</Text>
-      </View>
+    <NavigationContainer> 
+      <Stack.Navigator>
       
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{title: 'Welcome'}}
+          />
+
+        <Stack.Screen 
+          name="Contacts"
+          component={Contacts}
+          options={{title: 'Contacts'}}
+        />
+
+        <Stack.Screen 
+          name="Notes"
+          component={Notes}
+          options={{title: 'Notes'}}
+        />
+
+
+      </Stack.Navigator>
+    </NavigationContainer> 
     
-      <StatusBar style="auto" />
-    </View>
+  
   );
 }
 
