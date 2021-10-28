@@ -3,40 +3,29 @@ import React, {Component} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import Home from './components/Home'
 import Contacts from './components/Contacts'
 import Notes from './components/Notes'
+import Resources from './components/Resources'
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
  
+   <NavigationContainer>
 
-    <NavigationContainer> 
-      <Stack.Navigator>
-      
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{title: 'Welcome'}}
-          />
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Contacts" component={Contacts} />
+      <Tab.Screen name="Notes" component={Notes} />
+      <Tab.Screen name="Resources" component={Resources} />
+    </Tab.Navigator>
 
-        <Stack.Screen 
-          name="Contacts"
-          component={Contacts}
-          options={{title: 'Contacts'}}
-        />
-
-        <Stack.Screen 
-          name="Notes"
-          component={Notes}
-          options={{title: 'Notes'}}
-        />
-
-
-      </Stack.Navigator>
-    </NavigationContainer> 
+    </NavigationContainer>
+ 
     
   
   );
