@@ -1,19 +1,16 @@
-import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import React from "react";
+import { StyleSheet, Text, View, Button } from "react-native";
 
-export default function Resources({navigation}){
-
-    return(
-
-        <View style={styles.button}>
-        <Text>Resources</Text>
-        </View>
-    )
+export default function Resources({ navigation }) {
+  return (
+    <View style={styles.button}>
+      <Text>Resources</Text>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    button: {
-        width: 100
-
-    }
-})
+  button: {
+    width: 100,
+  },
+});

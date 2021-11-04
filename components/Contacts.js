@@ -1,11 +1,10 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
 
-export default function Contacts(){
-
-    return(
-        <View>
-            <Text>Contacts</Text>
-        </View>
-    )
+export default function Contacts() {
+  return (
+    <View>
+      <Text>Contacts</Text>
+    </View>
+  );
 }
