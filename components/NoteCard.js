@@ -12,7 +12,7 @@ export default function NoteCard({note}){
             
                         <View style={styles.topBar}>
                             <Text style={{flex: 9}}>{note.date}</Text> 
-                            <AntDesign style={{alignSelf: 'flex-end', flex: 1}} name="star" size={24} color="yellow" />
+                            { note.level.includes('Urgent') ? <AntDesign style={{alignSelf: 'flex-end', flex: 1}} name="star" size={24} color="yellow" /> : <Text></Text>}
                         </View>
 
                    
@@ -85,6 +85,6 @@ const styles = StyleSheet.create({
     },
 
     icon: {
-        padding: 1
+        padding: 2
     }
 })
