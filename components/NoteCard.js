@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity, FlatList } from 'react-native';
 import {AntDesign} from '@expo/vector-icons'
+import {Avatar} from 'react-native-elements'
 
 export default function NoteCard({note}){
 
@@ -24,14 +25,21 @@ export default function NoteCard({note}){
                                 numColumns={3}
                                 data={note.collabs}
                                 renderItem={({item}) => (
-                                    <View style={styles.icon}>
-                                        <Text >{item.name[0]}</Text>
-                                    </View>
+                                   
+                                        <View style={styles.icon}>
+                                        <Avatar 
+                                            rounded 
+                                            backgroundColor='#28fc08'
+                                            size="small"
+                                            title={item.name[0]} 
+                                        />
+                                        </View>
+                                  
                                 )}
                             />
 
                             
-                            <Text style={{flex: 3, alignSelf: 'center', textAlign: 'left', marginLeft: '10%'}}>{note.title}</Text>
+                            <Text style={{flex: 2, alignSelf: 'center', textAlign: 'left', marginLeft: '10%'}}>{note.title}</Text>
                            
 
                         </View>
@@ -77,14 +85,6 @@ const styles = StyleSheet.create({
     },
 
     icon: {
-        backgroundColor: '#28fc08',
-        margin: 1,
-        flex: 1,
-        padding: 3,
-        height: 25,
-        width: 25,
-        borderRadius: 25,
-        justifyContent: 'center',
-        alignItems: 'center'
+        padding: 1
     }
 })
