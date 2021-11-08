@@ -9,6 +9,8 @@ import Home from "./components/Home";
 import Contacts from "./components/Contacts";
 import Notes from "./components/Notes";
 import Resources from "./components/Resources";
+import CreateAccount from "./components/CreateAccount";
+
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -34,6 +36,11 @@ export default function App() {
         <Stack.Screen
           name="MainTabNavigator"
           component={MainTabNavigator}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="CreateAccount"
+          component={CreateAccount}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

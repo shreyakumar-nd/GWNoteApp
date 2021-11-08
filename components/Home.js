@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { Link } from "@react-navigation/native";
 
+
 export default function Home({ navigation }) {
   const [pages, setPages] = useState([
     { name: "Contacts", key: "1" },

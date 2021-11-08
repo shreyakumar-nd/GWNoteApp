@@ -11,44 +11,25 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-
-
-export default function Login({ navigation }) {
+export default function CreateAccount({navigation}){
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-    //id, email, password, name, position, auth_token
-  var temp = new User(1,"test@nd.edu", "password", "user", "dev", 1231221312);
+  const [name, setName] = useState("");
+  const [position, setPosition] = useState("");
   
-  function forgotPassword() {
-   //need email system to authenticate user to change password
-  }
-
   function createAccount(){
-    navigation.navigate("CreateAccount");
+    let user = new User(email, password, name, position);
+    //insert db creation route 
+    navigation.navigate("Login");
   }
-
-  function validateForm() {
-    if(email.length > 0 && password.length > 0){
-      if(email == temp.email && password == temp.password){
-      navigation.navigate("MainTabNavigator");
-      }
-      else{
-        alert("Incorrect email or password");
-      }
-    }
-    else{
-      return false;
-    }
-  }
-  return (
+  return(
     <View style={styles.container}>
-      <Image style={styles.image} source={require("../assets/logo2.png")} />
 
       <StatusBar style="auto" />
       <View style={styles.inputView}>
         <TextInput
           style={styles.TextInput}
-          placeholder="Email..."
+          placeholder="Enter your email..."
           placeholderTextColor="white"
           onChangeText={(email) => setEmail(email)}
         />
@@ -57,23 +38,32 @@ export default function Login({ navigation }) {
       <View style={styles.inputView}>
         <TextInput
           style={styles.TextInput}
-          placeholder="Password..."
+          placeholder="Enter your password..."
           placeholderTextColor="white"
           secureTextEntry={true}
           onChangeText={(password) => setPassword(password)}
         />
       </View>
-
-      <TouchableOpacity onPress={() => forgotPassword()}>
-        <Text style={styles.forgot_button}>Forgot Password?</Text>
-      </TouchableOpacity>
-
+      <View style={styles.inputView}>
+        <TextInput
+          style={styles.TextInput}
+          placeholder="Name"
+          placeholderTextColor="white"
+          secureTextEntry={true}
+          onChangeText={(name) => setName(name)}
+        />
+      </View>
+      <View style={styles.inputView}>
+        <TextInput
+          style={styles.TextInput}
+          placeholder="Position"
+          placeholderTextColor="white"
+          secureTextEntry={true}
+          onChangeText={(position) => setPosition(position)}
+        />
+      </View>
       <TouchableOpacity onPress={() => createAccount()}>
-        <Text style={styles.forgot_button}>Create Account?</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.loginBtn} onPress={() => validateForm()}>
-        <Text style={styles.loginText}>LOGIN</Text>
+        <Text style={styles.forgot_button}>Create Account</Text>
       </TouchableOpacity>
     </View>
   );
@@ -89,8 +79,8 @@ const styles = StyleSheet.create({
 
   image: {
     marginBottom: 40,
-    width: 250,
-    height: 300,
+    width: "80%",
+    height: "50%",
   },
 
   inputView: {
