@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import {User, UserList} from "./Classes/User";
+import { User, UserList } from "./Classes/User";
 import {
   StyleSheet,
   Text,
@@ -11,20 +11,19 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-export default function CreateAccount({navigation}){
+export default function CreateAccount({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [position, setPosition] = useState("");
-  
-  function createAccount(){
+
+  function createAccount() {
     let user = new User(email, password, name, position);
-    //insert db creation route 
+    //insert db creation route
     navigation.navigate("Login");
   }
-  return(
+  return (
     <View style={styles.container}>
-
       <StatusBar style="auto" />
       <View style={styles.inputView}>
         <TextInput

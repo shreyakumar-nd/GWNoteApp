@@ -3,16 +3,18 @@ import { StyleSheet, Text, View } from "react-native";
 import { Button } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 
-class TopBar extends React.Component { 
+class TopBar extends React.Component {
   render() {
-    
     return (
       <View style={styles.container}>
         <Text></Text>
         <Text></Text>
-        <Button style={styles.button} title="Logout" onPress={() => this.props.navigation.navigate("Login")}
+        <Button
+          style={styles.button}
+          title="Logout"
+          onPress={() => this.props.navigation.navigate("Login")}
           icon={{
             name: "logout",
             size: 20,

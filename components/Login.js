@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import {User, UserList} from "./Classes/User";
+import { User, UserList } from "./Classes/User";
 import {
   StyleSheet,
   Text,
@@ -11,19 +11,16 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-
-
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-    //id, email, password, name, position, auth_token
-  var temp = new User(1,"Test@nd.edu", "password", "user", "dev", 1231221312);
-  
+  //id, email, password, name, position, auth_token
+  var temp = new User(1, "Test@nd.edu", "password", "user", "dev", 1231221312);
   function forgotPassword() {
-   //need email system to authenticate user to change password
+    //need email system to authenticate user to change password
   }
 
-  function createAccount(){
+  function createAccount() {
     navigation.navigate("CreateAccount");
   }
 
@@ -33,28 +30,25 @@ export default function Login({ navigation }) {
     //navigation.navigate("MainTabNavigator");
     //
 
-    if(email.length > 0 && password.length > 0){
-      if(email == temp.email && password == temp.password){
-      navigation.navigate("MainTabNavigator");
-      }
-      else{
+    if (email.length > 0 && password.length > 0) {
+      if (email == temp.email && password == temp.password) {
+        navigation.navigate("MainTabNavigator");
+      } else {
         alert("Incorrect email or password");
       }
-    }
-    else{
+    } else {
       return false;
     }
   }
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={require("../assets/logo2.png")} />
-
+      <Image style={styles.image} source={require("../assets/logo2.png")}/>
       <StatusBar style="auto" />
       <View style={styles.inputView}>
         <TextInput
           style={styles.TextInput}
           placeholder="Email..."
-          placeholderTextColor="white"
+          placeholderTextColor="white"    
           onChangeText={(email) => setEmail(email)}
         />
       </View>
@@ -115,6 +109,7 @@ const styles = StyleSheet.create({
     marginLeft: 0,
     width: "100%",
     textAlign: "center",
+    color: "white",
   },
 
   forgot_button: {
