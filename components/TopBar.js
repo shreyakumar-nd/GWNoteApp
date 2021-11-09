@@ -3,19 +3,22 @@ import { StyleSheet, Text, View } from "react-native";
 import { Button } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-class TopBar extends React.Component {
+import { useNavigation } from '@react-navigation/native';
+
+class TopBar extends React.Component { 
   render() {
+    
     return (
       <View style={styles.container}>
-        <Text>Left</Text>
-        <Text>TopBar</Text>
-        <Button
+        <Text></Text>
+        <Text></Text>
+        <Button style={styles.button} title="Logout" onPress={() => this.props.navigation.navigate("Login")}
           icon={{
-            name: "FaDoorOpen",
-            size: 15,
+            name: "logout",
+            size: 20,
             color: "white",
           }}
-          title="Button with icon object"
+          title="Logout"
         />
       </View>
     );
@@ -27,7 +30,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
     height: 52,
     flexDirection: "row", // row
-    backgroundColor: "yellow",
+    backgroundColor: "fff",
     alignItems: "center",
     justifyContent: "space-between", // center, space-around
     paddingLeft: 10,

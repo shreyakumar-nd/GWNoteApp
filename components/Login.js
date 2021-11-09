@@ -17,7 +17,7 @@ export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
     //id, email, password, name, position, auth_token
-  var temp = new User(1,"test@nd.edu", "password", "user", "dev", 1231221312);
+  var temp = new User(1,"Test@nd.edu", "password", "user", "dev", 1231221312);
   
   function forgotPassword() {
    //need email system to authenticate user to change password
@@ -28,6 +28,11 @@ export default function Login({ navigation }) {
   }
 
   function validateForm() {
+    //for testing uncomment below
+    //so you do not have to input something for login
+    navigation.navigate("MainTabNavigator");
+    //
+
     if(email.length > 0 && password.length > 0){
       if(email == temp.email && password == temp.password){
       navigation.navigate("MainTabNavigator");

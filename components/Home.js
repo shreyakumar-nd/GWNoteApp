@@ -8,6 +8,7 @@ import {
   FlatList,
 } from "react-native";
 import { Link } from "@react-navigation/native";
+import TopBar from '../components/TopBar';
 
 
 export default function Home({ navigation }) {
@@ -18,7 +19,10 @@ export default function Home({ navigation }) {
   ]);
 
   return (
+    
     <View>
+      <TopBar navigation={navigation}>
+      </TopBar>
       <FlatList
         keyExtractor={(item) => item.key}
         data={pages}
