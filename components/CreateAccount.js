@@ -48,7 +48,6 @@ export default function CreateAccount({ navigation }) {
           style={styles.TextInput}
           placeholder="Name"
           placeholderTextColor="white"
-          secureTextEntry={true}
           onChangeText={(name) => setName(name)}
         />
       </View>
@@ -57,7 +56,6 @@ export default function CreateAccount({ navigation }) {
           style={styles.TextInput}
           placeholder="Position"
           placeholderTextColor="white"
-          secureTextEntry={true}
           onChangeText={(position) => setPosition(position)}
         />
       </View>
@@ -88,7 +86,6 @@ const styles = StyleSheet.create({
     width: "70%",
     height: 45,
     marginBottom: 20,
-
     alignItems: "center",
   },
 
@@ -99,6 +96,7 @@ const styles = StyleSheet.create({
     marginLeft: 0,
     width: "100%",
     textAlign: "center",
+    color: "white",
   },
 
   forgot_button: {

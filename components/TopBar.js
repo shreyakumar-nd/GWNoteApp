@@ -3,8 +3,6 @@ import { StyleSheet, Text, View } from "react-native";
 import { Button } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-import { useNavigation } from "@react-navigation/native";
-
 class TopBar extends React.Component {
   render() {
     return (
