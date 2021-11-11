@@ -25,6 +25,10 @@ export default function CreateAccount({ navigation }) {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Welcome to the Goodwill Note App please fill out the fields below and press Create Account</Text>
+      </View>
+
       <View style={styles.inputView}>
         <TextInput
           style={styles.TextInput}
@@ -112,5 +116,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 40,
     backgroundColor: "#009dff",
+  },
+  headerText: {
+    fontSize: 20,
+    color: "black",
+    padding: 20,
   },
 });

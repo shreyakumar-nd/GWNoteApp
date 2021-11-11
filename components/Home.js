@@ -18,7 +18,7 @@ export default function Home({ navigation }) {
   ]);
 
   return (
-    <View>
+    <View style={styles.container}>
       <TopBar navigation={navigation}></TopBar>
       <FlatList
         keyExtractor={(item) => item.key}
@@ -36,6 +36,9 @@ export default function Home({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "white"
+  },
   button: {
     marginTop: 24,
     padding: 30,

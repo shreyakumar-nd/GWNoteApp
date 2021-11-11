@@ -12,7 +12,7 @@ class TopBar extends React.Component {
         <Button
           style={styles.button}
           title="Logout"
-          onPress={() => this.props.navigation.navigate("Login")}
+          onPress={() => this.props.navigation.popToTop()}
           icon={{
             name: "logout",
             size: 20,
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
     height: 52,
     flexDirection: "row", // row
-    backgroundColor: "fff",
+    backgroundColor: "#ffff",
     alignItems: "center",
     justifyContent: "space-between", // center, space-around
     paddingLeft: 10,

@@ -17,6 +17,7 @@ export default function Login({ navigation }) {
   //id, email, password, name, position, auth_token
   var temp = new User(1, "Test@nd.edu", "password", "user", "dev", 1231221312);
   function forgotPassword() {
+    navigation.navigate("ForgotPassword");
     //need email system to authenticate user to change password
   }
 
@@ -32,6 +33,8 @@ export default function Login({ navigation }) {
 
     if (email.length > 0 && password.length > 0) {
       if (email == temp.email && password == temp.password) {
+        setEmail("");
+        setPassword("");
         navigation.navigate("MainTabNavigator");
       } else {
         alert("Incorrect email or password");

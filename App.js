@@ -10,7 +10,8 @@ import Contacts from "./components/Contacts";
 import Notes from "./components/Notes";
 import Resources from "./components/Resources";
 import CreateAccount from "./components/CreateAccount";
-
+import ForgotPassword from "./components/ForgotPassword";
+import ResetPassword from "./components/ResetPassword";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -41,6 +42,16 @@ export default function App() {
         <Stack.Screen
           name="CreateAccount"
           component={CreateAccount}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ForgotPassword"
+          component={ForgotPassword}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ResetPassword"
+          component={ResetPassword}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
