@@ -12,6 +12,7 @@ import Resources from "./components/Resources";
 import CreateAccount from "./components/CreateAccount";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
+import Profile from "./components/Profile";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -52,6 +53,11 @@ export default function App() {
         <Stack.Screen
           name="ResetPassword"
           component={ResetPassword}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

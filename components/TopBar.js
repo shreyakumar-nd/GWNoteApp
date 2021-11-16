@@ -1,13 +1,23 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Button } from "react-native-elements";
-import Icon from "react-native-vector-icons/FontAwesome";
+import icon from "react-native-vector-icons/FontAwesome";
 
 class TopBar extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text></Text>
+        <Button
+          style={styles.button}
+          title="Profile"
+          onPress={() => this.props.navigation.navigate("Profile")}
+          icon={{
+            name: "person",
+            size: 20,
+            color: "white",
+          }}
+          title="Profile"
+        />
         <Text></Text>
         <Button
           style={styles.button}

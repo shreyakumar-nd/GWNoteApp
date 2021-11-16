@@ -28,7 +28,7 @@ export default function Login({ navigation }) {
   function validateForm() {
     //for testing uncomment below
     //so you do not have to input something for login
-    //navigation.navigate("MainTabNavigator");
+    navigation.navigate("MainTabNavigator");
     //
 
     if (email.length > 0 && password.length > 0) {

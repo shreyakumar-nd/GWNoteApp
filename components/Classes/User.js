@@ -8,6 +8,12 @@ class User {
     this.auth_token = auth_token;
   }
 
+  update(name, password, position){
+    this.name = name;
+    this.password = password;
+    this.position = position;
+  }
+
   addAuthToken(auth_token) {
     this.auth_token = auth_token;
   }
