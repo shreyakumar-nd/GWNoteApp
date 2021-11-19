@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Button, ScrollView, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import NoteEditorView from './NoteEditorView';
 import NoteEditorEdit from './NoteEditorEdit';
 
 export default function NoteEditor({ route, navigation}){
+
+    const [body, setBody] = useState('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget sapien condimentum, pulvinar quam sed, aliquet dolor. In sodales risus a sollicitudin interdum. Suspendisse quis arcu eu nulla viverra convallis id nec tellus. Praesent sit amet volutpat turpis. Etiam et fermentum augue. Nunc efficitur fringilla odio et hendrerit. Proin a vulputate ipsum. Vestibulum lacinia magna nec arcu fringilla, non pretium velit finibus. Phasellus congue viverra dictum. Mauris pharetra lorem vel varius blandit. Mauris vehicula, orci et dignissim ultricies, dui nibh tristique nunc, sed placerat ipsum lacus et nulla. Sed malesuada non sapien sit amet imperdiet. In dapibus lorem sit amet.')
 
     const {note} = route.params
 
@@ -15,7 +17,12 @@ export default function NoteEditor({ route, navigation}){
         })
     }
 
+    const editNote = (newBody) => {
+        setBody(newBody)
+    }
+
     return(
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} >
         <View style={styles.main}>
             
             <View style={styles.header}>
@@ -30,17 +37,13 @@ export default function NoteEditor({ route, navigation}){
             </View>
 
 
-            {EditMode == 0 ?  <NoteEditorView note={note} /> : <NoteEditorEdit note={note} /> }
+            {EditMode == 0 ?  <NoteEditorView body={body} pressHandler={pressHandler} /> : <NoteEditorEdit body={body} pressHandler={pressHandler} editNote={editNote} /> }
           
 
-            <View style={styles.bottomBar}> 
-                <Button 
-                    title="Edit"
-                    onPress={() => {pressHandler()}}
-                />
-            </View>
+            
 
         </View>
+        </TouchableWithoutFeedback >
     )
 }
 
@@ -63,11 +66,6 @@ const styles = StyleSheet.create({
 
     titleText: {
         fontSize: 30
-    },
-
-
-    bottomBar: {
-        flex: 1
     }
 
 })
