@@ -11,15 +11,15 @@ import { Link } from "@react-navigation/native";
 import { ScrollView } from "react-native-gesture-handler";
 import { User, UserList } from "./Classes/User";
 
-export default function Contacts() {
-  var user = new User(1, "Test@nd.edu", "password", "user", "dev", 1231221312);
-  var user1 = new User(2, "Test1@nd.edu", "password", "user1", "dev", 1231221312);
-  var user2 = new User(3, "Test2@nd.edu", "password", "user2", "dev", 1231221312);
-  var user3 = new User(4, "Test3@nd.edu", "password", "user3", "dev", 1231221312);
-  var user4 = new User(5, "Test4@nd.edu", "password", "user4", "dev", 1231221312);
-  var user5 = new User(6, "Test5@nd.edu", "password", "user5", "dev", 1231221312);
-  var user6 = new User(7, "Test6@nd.edu", "password", "user6", "dev", 1231221312);
-  var user7 = new User(8, "Test7@nd.edu", "password", "user7", "dev", 1231221312);
+export default function Contacts({navigation}) {
+  var user = new User(1, "Test@nd.edu", "password", "John Smith", "dev", 1231221312, "JS");
+  var user1 = new User(2, "Test1@nd.edu", "password", "Henry Jones", "dev", 1231221312, "HJ");
+  var user2 = new User(3, "Test2@nd.edu", "password", "Kyle Kones", "dev", 1231221312, "KK");
+  var user3 = new User(4, "Test3@nd.edu", "password", "Anna Smith", "dev", 1231221312, "AS");
+  var user4 = new User(5, "Test4@nd.edu", "password", "Jon Slone", "dev", 1231221312, "JS");
+  var user5 = new User(6, "Test5@nd.edu", "password", "user5", "dev", 1231221312, "U");
+  var user6 = new User(7, "Test6@nd.edu", "password", "user6", "dev", 1231221312, "U");
+  var user7 = new User(8, "Test7@nd.edu", "password", "user7", "dev", 1231221312, "U");
 
   const [contacts, setContacts] = useState([
     { name: user.name, key: "1", user: user },
@@ -37,10 +37,8 @@ export default function Contacts() {
           keyExtractor={(item) => item.key}
           data={contacts}
           renderItem={({ item }) => (
-            <TouchableOpacity>
-              <Link style={styles.button} to={{ screen: item.name }}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('ContactPage', {user:item.user})}>
                 <Text>{item.name}</Text>
-              </Link>
             </TouchableOpacity>
           )}
         />

@@ -16,6 +16,7 @@ export default function ResetPassword({navigation}) {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   function resetPassword() {
+    //fetch auth code from db and check if they are the same as user input
     if (authCode == "") {
       alert("Please enter your auth code");
     } else if (password == "") {

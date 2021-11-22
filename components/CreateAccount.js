@@ -18,7 +18,9 @@ export default function CreateAccount({ navigation }) {
   const [position, setPosition] = useState("");
 
   function createAccount() {
-    let user = new User(email, password, name, position);
+    let names = name.split(" ");
+    let initials = names[0][0] + names[1][0];
+    let user = new User(email, password, name, position, initials);
     //insert db creation route
     navigation.navigate("Login");
   }
