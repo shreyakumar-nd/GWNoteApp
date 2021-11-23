@@ -12,10 +12,10 @@ import {
 } from "react-native";
 let user = null;
 export default function ContactPage({route, navigation}) {
-  if(route.params){
+  if(route.params.user.address != ""){
     user = route.params.user;
   } else{
-    user = user;
+    user = new Contact(2, "Test1@nd.edu", "Billy", "Smith", 9122347890, "1349 E Ewing Ave, South Bend, IN 46613","normal", "#Group 1", "BS", "Notes");
   }
   console.log(user);
   const [email, setEmail] = useState("");
