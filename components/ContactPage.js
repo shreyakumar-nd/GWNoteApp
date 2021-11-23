@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { User, UserList } from "./Classes/User";
+import { Contact} from "./Classes/Contact";
 import { Avatar } from 'react-native-elements';
 import {
   StyleSheet,
@@ -10,25 +10,33 @@ import {
   Button,
   TouchableOpacity,
 } from "react-native";
-
+let user = null;
 export default function ContactPage({route, navigation}) {
-  const {user} = route.params;
+  if(route.params){
+    user = route.params.user;
+  } else{
+    user = user;
+  }
+  console.log(user);
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [position, setPosition] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [contactType, setContactType] = useState("");
+  const [group, setGroup] = useState("");
+  const [notes, setNotes] = useState("");
+  const [address, setAddress] = useState("");
   const [editable, setEditable] = useState(false);
   const [editButtonText, setEditButtonText] = useState("Edit");
   const editButton = useRef(null);
 
-  function editProfile() {
+  function editContact(usr) {
     if (!editable) {
       setEditable(true);
       setEditButtonText("Save");
     } else {
       setEditable(false);
       setEditButtonText("Edit");
-      user.update(name, password, position);
+      console.log(user);
+      user = usr.update(user.id, email, user.firstName, user.lastName, phoneNumber, address, contactType, group, user.initials, notes);
       //run db update function route
     }
   }
@@ -58,22 +66,12 @@ export default function ContactPage({route, navigation}) {
       onPress={() => console.log("Works!")}
       activeOpacity={0.7}
 />
-        <Text style={styles.text}>{user.name}</Text>
+        <Text style={styles.text}>{user.firstName + ' ' + user.lastName}</Text>
         <View style={styles.inputView}>
           <TextInput
-            style={styles.TextInput}
-            defaultValue={user.name}
-            editable={editable}
-            placeholderTextColor="white"
-            onChangeText={(name) => setName(name)}
-          />
-        </View>
-
-        <View style={styles.inputView}>
-          <TextInput
-            editable={false}
             style={styles.TextInput}
             defaultValue={user.email}
+            editable={editable}
             placeholderTextColor="white"
             onChangeText={(email) => setEmail(email)}
           />
@@ -81,30 +79,49 @@ export default function ContactPage({route, navigation}) {
 
         <View style={styles.inputView}>
           <TextInput
+            editable={false}
+            editable={editable}
+            style={styles.TextInput}
+            defaultValue={user.phoneNumber}
+            placeholderTextColor="white"
+            onChangeText={(phoneNumber) => setPhoneNumber(phoneNumber)}
+          />
+        </View>
+
+        <View style={styles.inputView}>
+          <TextInput
             style={styles.TextInput}
             editable={editable}
-            secureTextEntry={true}
-            defaultValue={user.password}
+            defaultValue={user.address}
             placeholderTextColor="white"
-            onChangeText={(password) => setPassword(password)}
+            onChangeText={(address) => setAddress(address)}
           />
         </View>
         <View style={styles.inputView}>
           <TextInput
             style={styles.TextInput}
-            defaultValue={user.position}
+            defaultValue={user.contactType}
             editable={editable}
             placeholderTextColor="white"
-            onChangeText={(position) => setPosition(position)}
+            onChangeText={(contactType) => setContactType(contactType)}
+          />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.TextInput}
+            defaultValue={user.group}
+            editable={editable}
+            placeholderTextColor="white"
+            onChangeText={(group) => setGroup(group)}
           />
         </View>
         <TouchableOpacity
           ref={editButton}
           style={styles.enterButton}
-          onPress={() => editProfile()}
-        >
+          onPress={() => editContact(user)}>
           <Text>{editButtonText}</Text>
         </TouchableOpacity>
+        <Text style={styles.text}>Notes:</Text>
       </View>
       </View>
   );
@@ -179,7 +196,7 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 40,
+    marginTop: 10,
     backgroundColor: "#009dff",
   },
 
