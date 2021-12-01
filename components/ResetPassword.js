@@ -17,12 +17,9 @@ export default function ResetPassword({navigation}) {
 
   function resetPassword() {
     //fetch auth code from db and check if they are the same as user input
-    if (authCode == "") {
-      alert("Please enter your auth code");
-    } else if (password == "") {
-      alert("Please enter your password");
-    } else if (confirmPassword == "") {
-      alert("Please enter your confirmed password");
+    let auth_code = "123456";
+    if (authCode != auth_code) {
+      alert("Invalid auth code");
     } else if (password != confirmPassword) {
       alert("Passwords do not match");
     } else {

@@ -84,7 +84,7 @@ export default function ContactPage({ route, navigation }) {
       "Notes"
     );
   }
-  console.log(user);
+ 
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [contactType, setContactType] = useState("");

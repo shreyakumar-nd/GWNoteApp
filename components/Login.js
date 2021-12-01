@@ -31,17 +31,13 @@ export default function Login({ navigation }) {
     navigation.navigate("MainTabNavigator");
     //
 
-    if (email.length > 0 && password.length > 0) {
-      if (email == temp.email && password == temp.password) {
+    if (email.length > 0 && password.length > 0 && (email == temp.email && password == temp.password)) {
         setEmail("");
         setPassword("");
         navigation.navigate("MainTabNavigator");
       } else {
         alert("Incorrect email or password");
       }
-    } else {
-      return false;
-    }
   }
   return (
     <View style={styles.container}>
