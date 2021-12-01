@@ -14,6 +14,7 @@ import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
 import Profile from "./components/Profile";
 import ContactPage from "./components/ContactPage";
+import AddContact from "./components/AddContact";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -64,6 +65,11 @@ export default function App() {
         <Stack.Screen
           name="ContactPage"
           component={ContactPage}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="AddContact"
+          component={AddContact}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

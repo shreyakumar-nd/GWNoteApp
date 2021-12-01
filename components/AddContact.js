@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Contact } from "./Classes/Contact";
 import { Avatar } from "react-native-elements";
-import NoteCard from "./NoteCard";
+
 import {
   StyleSheet,
   Text,
@@ -10,111 +10,49 @@ import {
   TextInput,
   Button,
   TouchableOpacity,
-  FlatList,
 } from "react-native";
 let user = null;
-export default function ContactPage({ route, navigation }) {
-  const [notes, setNotes] = useState([
-    {
-      id: "1",
-      date: "1/2/2021",
-      title: "Note 1",
-      body: "lorem ip sem olam",
-      author: "Pablo",
-      collabs: [
-        { name: "James", id: "1" },
-        { name: "Shreya", id: "3" },
-      ],
-      level: "Moderately Urgent",
-    },
-    {
-      id: "2",
-      date: "3/4/2021",
-      title: "Note 2",
-      body: "lorem ip sem olam",
-      author: "Connor",
-      collabs: [
-        { name: "James", id: "1" },
-        { name: "Grace", id: 2 },
-        { name: "Shreya", id: "3" },
-      ],
-      level: "Negligible",
-    },
-    {
-      id: "3",
-      date: "6/19/2021",
-      title: "Note 3",
-      body: "lorem ip sem olam",
-      author: "Yorch",
-      collabs: [
-        { name: "James", id: "1" },
-        { name: "Grace", id: 2 },
-        { name: "Shreya", id: "3" },
-      ],
-      level: "Incidental",
-    },
-    {
-      id: "4",
-      date: "11/2/2021",
-      title: "Note 4",
-      body: "lorem ip sem olam",
-      author: "Morris",
-      collabs: [
-        { name: "James", id: "1" },
-        { name: "Grace", id: 2 },
-        { name: "Shreya", id: "3" },
-        { name: "Bert", id: "4" },
-      ],
-      level: "Urgent",
-    },
-  ]);
-  if (route.params.user.address != "") {
-    user = route.params.user;
-  } else {
-    user = new Contact(
-      2,
-      "Test1@nd.edu",
-      "Billy",
-      "Smith",
-      "9122347890",
-      "1349 E Ewing Ave, South Bend, IN 46613",
-      "normal",
-      "#Group 1",
-      "BS",
-      "Notes"
-    );
-  }
-  console.log(user);
+export default function AddContact({ navigation }) {
+  let user1 = new Contact(
+    2,
+    "Test1@nd.edu",
+    "Billy",
+    "Smith",
+    "9122347890",
+    "1349 E Ewing Ave, South Bend, IN 46613",
+    "normal",
+    "#Group 1",
+    "BS",
+    "Notes"
+  );
+  let user = new Contact();
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [contactType, setContactType] = useState("");
   const [group, setGroup] = useState("");
-
+  const [notes, setNotes] = useState("");
   const [address, setAddress] = useState("");
-  const [editable, setEditable] = useState(false);
-  const [editButtonText, setEditButtonText] = useState("Edit");
-  const editButton = useRef(null);
-
-  function editContact(usr) {
-    if (!editable) {
-      setEditable(true);
-      setEditButtonText("Save");
-    } else {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [editable, setEditable] = useState(true);
+  function saveContact(usr) {
+    if (editable) {
       setEditable(false);
-      setEditButtonText("Edit");
+      let initials = firstName[0] + lastName[0];
       user = usr.update(
-        user.id,
+        1,
         email,
-        user.firstName,
-        user.lastName,
+        firstName,
+        lastName,
         phoneNumber,
         address,
         contactType,
         group,
-        user.initials,
+        initials,
         notes
       );
       //run db update function route
+      navigation.goBack();
     }
   }
 
@@ -132,33 +70,30 @@ export default function ContactPage({ route, navigation }) {
           }}
           title="Back"
         />
-        <Text></Text>
-        <Button
-          style={styles.button}
-          title={editButtonText}
-          onPress={() => editContact(user)}
-          icon={{
-            name: "gear",
-            size: 20,
-            color: "white",
-          }}
-          title={editButtonText}
-        />
       </View>
       <View style={styles.container}>
-        <Avatar
-          overlayContainerStyle={{ backgroundColor: "blue" }}
-          size="large"
-          title={user.initials}
-          rounded
-          onPress={() => console.log("Works!")}
-          activeOpacity={0.7}
-        />
-        <Text style={styles.text}>{user.firstName + " " + user.lastName}</Text>
         <View style={styles.inputView}>
           <TextInput
             style={styles.TextInput}
-            defaultValue={user.email}
+            placeholder="First name"
+            editable={editable}
+            placeholderTextColor="white"
+            onChangeText={(firstName) => setFirstName(firstName)}
+          />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.TextInput}
+            placeholder="Last name"
+            editable={editable}
+            placeholderTextColor="white"
+            onChangeText={(lastName) => setLastName(lastName)}
+          />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.TextInput}
+            placeholder="Email"
             editable={editable}
             placeholderTextColor="white"
             onChangeText={(email) => setEmail(email)}
@@ -170,7 +105,7 @@ export default function ContactPage({ route, navigation }) {
             editable={false}
             editable={editable}
             style={styles.TextInput}
-            defaultValue={user.phoneNumber}
+            placeholder="Phone Number"
             placeholderTextColor="white"
             onChangeText={(phoneNumber) => setPhoneNumber(phoneNumber)}
           />
@@ -180,7 +115,7 @@ export default function ContactPage({ route, navigation }) {
           <TextInput
             style={styles.TextInput}
             editable={editable}
-            defaultValue={user.address}
+            placeholder="Address"
             placeholderTextColor="white"
             onChangeText={(address) => setAddress(address)}
           />
@@ -188,7 +123,7 @@ export default function ContactPage({ route, navigation }) {
         <View style={styles.inputView}>
           <TextInput
             style={styles.TextInput}
-            defaultValue={user.contactType}
+            placeholder="Contact Type"
             editable={editable}
             placeholderTextColor="white"
             onChangeText={(contactType) => setContactType(contactType)}
@@ -197,19 +132,19 @@ export default function ContactPage({ route, navigation }) {
         <View style={styles.inputView}>
           <TextInput
             style={styles.TextInput}
-            defaultValue={user.group}
+            placeholder="Group Name"
             editable={editable}
             placeholderTextColor="white"
             onChangeText={(group) => setGroup(group)}
           />
         </View>
-      </View>
-      <View style={styles.notes}>
-        <FlatList
-          keyExtractor={(item) => item.id}
-          data={notes}
-          renderItem={({ item }) => <NoteCard note={item} />}
-        ></FlatList>
+        <TouchableOpacity
+          
+          style={styles.enterButton}
+          onPress={() => saveContact(user)}
+        >
+          <Text>Save</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -223,9 +158,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffff",
     alignItems: "center",
     justifyContent: "space-between", // center, space-around
-    paddingLeft: 10,
-    paddingRight: 10,
-    flex: 0.2,
+    paddingTop: 50,
+    paddingLeft: 30,
+    flex: 0.05,
   },
   avatar: {
     color: "black",
@@ -240,7 +175,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   container: {
-    flex: .7,
+    flex: 1,
 
     backgroundColor: "white",
     alignItems: "center",
@@ -258,7 +193,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: "70%",
     height: 45,
-    marginBottom: 10,
+    marginBottom: 20,
     fontSize: 20,
     alignItems: "center",
   },
@@ -279,6 +214,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   enterButton: {
+    width: "20%",
     borderRadius: 25,
     height: 50,
     alignItems: "center",
@@ -291,13 +227,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "black",
     padding: 20,
-  },
-  notes: {
-    flex: 0.5,
-    justifyContent: "flex-start",
-    alignItems: "center",
-    flexDirection: "column",
-    alignItems: "stretch",
-    backgroundColor: "#ffff",
   },
 });
