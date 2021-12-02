@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import NoteCard from './NoteCard'
 
-export default function Notes(){
+export default function Notes({navigation}){
+
 
     const [notes, setNotes] = useState([
         {id: '1', date: '1/2/2021', title: 'Note 1', body: 'lorem ip sem olam', author: 'Pablo', collabs: [{name: 'James', id: '1'}, {name: 'Shreya', id: '3'}], level: 'Moderately Urgent'},
@@ -10,6 +11,7 @@ export default function Notes(){
         {id: '3', date: '6/19/2021', title: 'Note 3', body: 'lorem ip sem olam', author: 'Yorch', collabs: [{name: 'James', id: '1'}, {name: 'Grace', 'id': 2}, {name: 'Shreya', id: '3'}], level: 'Incidental'},
         {id: '4', date: '11/2/2021', title: 'Note 4', body: 'lorem ip sem olam', author: 'Morris', collabs: [{name: 'James', id: '1'}, {name: 'Grace', 'id': 2}, {name: 'Shreya', id: '3'}, {name: 'Bert', id: '4'}], level: 'Urgent'}
     ])
+
 
     return(
         <View style={styles.notes}> 
@@ -19,7 +21,7 @@ export default function Notes(){
                 data={notes}
                 renderItem={({item}) => (
 
-                    <NoteCard note={item}/>
+                    <NoteCard note={item} navigation={navigation}/>
                 )}
             >
                 

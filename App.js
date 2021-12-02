@@ -7,7 +7,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import Contacts from "./components/Contacts";
-import Notes from "./components/Notes";
+import NoteNavigator from "./components/Notes/NoteNavigator";
 import Resources from "./components/Resources";
 import CreateAccount from "./components/CreateAccount";
 import ForgotPassword from "./components/ForgotPassword";
@@ -23,7 +23,7 @@ const MainTabNavigator = () => {
     <Tab.Navigator>
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Contacts" component={Contacts} />
-      <Tab.Screen name="Notes" component={Notes} />
+      <Tab.Screen name="Notes" component={NoteNavigator} />
       <Tab.Screen name="Resources" component={Resources} />
     </Tab.Navigator>
   );
