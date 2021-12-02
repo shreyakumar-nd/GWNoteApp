@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
   TouchableOpacity,
   FlatList,
 } from "react-native";
@@ -37,7 +36,8 @@ export default function Home({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white"
+    backgroundColor: "white", 
+    flex: 1
   },
   button: {
     marginTop: 24,
