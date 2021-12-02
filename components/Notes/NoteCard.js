@@ -3,11 +3,14 @@ import { StyleSheet, Text, View, Button, TouchableOpacity, FlatList } from 'reac
 import {AntDesign} from '@expo/vector-icons'
 import {Avatar} from 'react-native-elements'
 
-export default function NoteCard({note}){
+
+export default function NoteCard({note, navigation}){
 
     return(
 
-            <TouchableOpacity >
+            <TouchableOpacity onPress={() => navigation.navigate('NoteEditor', {
+                note: note
+            })} >
                 <View style={styles.noteCard}> 
             
                         <View style={styles.topBar}>
