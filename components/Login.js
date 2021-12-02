@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
+import { User, UserList } from "./Classes/User";
 import {
   StyleSheet,
   Text,
@@ -13,19 +14,40 @@ import {
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  //id, email, password, name, position, auth_token
+  var temp = new User(1, "Test@nd.edu", "password", "user", "dev", 1231221312);
+  function forgotPassword() {
+    navigation.navigate("ForgotPassword");
+    //need email system to authenticate user to change password
+  }
+
+  function createAccount() {
+    navigation.navigate("CreateAccount");
+  }
+
   function validateForm() {
+    //for testing uncomment below
+    //so you do not have to input something for login
     navigation.navigate("MainTabNavigator");
+    //
+
+    if (email.length > 0 && password.length > 0 && (email == temp.email && password == temp.password)) {
+        setEmail("");
+        setPassword("");
+        navigation.navigate("MainTabNavigator");
+      } else {
+        alert("Incorrect email or password");
+      }
   }
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={require("../assets/logo2.png")} />
-
+      <Image style={styles.image} source={require("../assets/logo2.png")}/>
       <StatusBar style="auto" />
       <View style={styles.inputView}>
         <TextInput
           style={styles.TextInput}
           placeholder="Email..."
-          placeholderTextColor="white"
+          placeholderTextColor="white"    
           onChangeText={(email) => setEmail(email)}
         />
       </View>
@@ -40,8 +62,12 @@ export default function Login({ navigation }) {
         />
       </View>
 
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => forgotPassword()}>
         <Text style={styles.forgot_button}>Forgot Password?</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => createAccount()}>
+        <Text style={styles.forgot_button}>Create Account?</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.loginBtn} onPress={() => validateForm()}>
@@ -61,8 +87,8 @@ const styles = StyleSheet.create({
 
   image: {
     marginBottom: 40,
-    width: "80%",
-    height: "50%",
+    width: 250,
+    height: 300,
   },
 
   inputView: {
@@ -82,6 +108,7 @@ const styles = StyleSheet.create({
     marginLeft: 0,
     width: "100%",
     textAlign: "center",
+    color: "white",
   },
 
   forgot_button: {

@@ -9,6 +9,12 @@ import Home from "./components/Home";
 import Contacts from "./components/Contacts";
 import NoteNavigator from "./components/Notes/NoteNavigator";
 import Resources from "./components/Resources";
+import CreateAccount from "./components/CreateAccount";
+import ForgotPassword from "./components/ForgotPassword";
+import ResetPassword from "./components/ResetPassword";
+import Profile from "./components/Profile";
+import ContactPage from "./components/ContactPage";
+import AddContact from "./components/AddContact";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -36,7 +42,38 @@ export default function App() {
           component={MainTabNavigator}
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+          name="CreateAccount"
+          component={CreateAccount}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ForgotPassword"
+          component={ForgotPassword}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ResetPassword"
+          component={ResetPassword}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ContactPage"
+          component={ContactPage}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="AddContact"
+          component={AddContact}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
+      
     </NavigationContainer>
   );
 }

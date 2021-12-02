@@ -8,6 +8,7 @@ import {
   FlatList,
 } from "react-native";
 import { Link } from "@react-navigation/native";
+import TopBar from "../components/TopBar";
 
 export default function Home({ navigation }) {
   const [pages, setPages] = useState([
@@ -17,7 +18,8 @@ export default function Home({ navigation }) {
   ]);
 
   return (
-    <View>
+    <View style={styles.container}>
+      <TopBar navigation={navigation}></TopBar>
       <FlatList
         keyExtractor={(item) => item.key}
         data={pages}
@@ -34,6 +36,9 @@ export default function Home({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "white"
+  },
   button: {
     marginTop: 24,
     padding: 30,
