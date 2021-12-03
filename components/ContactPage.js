@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Contact } from "./Classes/Contact";
 import { Avatar } from "react-native-elements";
-import NoteCard from "./NoteCard";
+import NoteCard from "./Notes/NoteCard";
 import {
   StyleSheet,
   Text,

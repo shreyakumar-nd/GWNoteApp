@@ -15,6 +15,8 @@ import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
 import Profile from "./components/Profile";
 import IndividualContact from "./components/IndividualContact";
+import ContactPage from './components/ContactPage';
+import AddContact from './components/AddContact'
 
 
 const Stack = createNativeStackNavigator();
@@ -60,7 +62,7 @@ const MainTabNavigator = () => {
       >
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Contacts" component={Contacts} options={{ headerTitle: (props) => <CustomizableHeader {...props} /> }}/>
-      <Tab.Screen name="Notes" component={Notes} />
+      <Tab.Screen name="Notes" component={NoteNavigator} />
       <Tab.Screen name="Resources" component={Resources} />
     </Tab.Navigator>
   );
@@ -105,6 +107,8 @@ export default function App() {
         <Stack.Screen 
           name="IndividualContact"
           component={IndividualContact}
+        />
+        
         <Stack.Screen
           name="ContactPage"
           component={ContactPage}
