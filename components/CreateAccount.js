@@ -8,6 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
+import {styles} from "../assets/StyleSheet";
 
 export default function CreateAccount({ navigation }) {
   const [email, setEmail] = useState("");
@@ -16,7 +17,9 @@ export default function CreateAccount({ navigation }) {
   const [position, setPosition] = useState("");
 
   function createAccount() {
-    let user = new User(email, password, name, position);
+    let names = name.split(" ");
+    let initials = names[0][0] + names[1][0];
+    let user = new User(email, password, name, position, initials);
     //insert db creation route
     navigation.navigate("Login");
   }
@@ -68,56 +71,3 @@ export default function CreateAccount({ navigation }) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  image: {
-    marginBottom: 40,
-    width: "80%",
-    height: "50%",
-  },
-
-  inputView: {
-    backgroundColor: "blue",
-    borderRadius: 30,
-    width: "70%",
-    height: 45,
-    marginBottom: 20,
-    alignItems: "center",
-  },
-
-  TextInput: {
-    height: 50,
-    flex: 1,
-    padding: 10,
-    marginLeft: 0,
-    width: "100%",
-    textAlign: "center",
-    color: "white",
-  },
-
-  forgot_button: {
-    height: 30,
-    marginBottom: 30,
-  },
-
-  loginBtn: {
-    width: "80%",
-    borderRadius: 25,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 40,
-    backgroundColor: "#009dff",
-  },
-  headerText: {
-    fontSize: 20,
-    color: "black",
-    padding: 20,
-  },
-});

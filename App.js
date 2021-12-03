@@ -8,13 +8,14 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import Login from "./components/Login";
 import Home from "./components/Home";
 import Contacts from "./components/Contacts";
-import Notes from "./components/Notes";
+import NoteNavigator from "./components/Notes/NoteNavigator";
 import Resources from "./components/Resources";
 import CreateAccount from "./components/CreateAccount";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
 import Profile from "./components/Profile";
 import IndividualContact from "./components/IndividualContact";
+
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -100,12 +101,22 @@ export default function App() {
           component={Profile}
           options={{ headerShown: false }}
         />
+
         <Stack.Screen 
           name="IndividualContact"
           component={IndividualContact}
+        <Stack.Screen
+          name="ContactPage"
+          component={ContactPage}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="AddContact"
+          component={AddContact}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
+      
     </NavigationContainer>
   );
 }
