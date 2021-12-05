@@ -23,6 +23,7 @@ export default function NoteEditor({ route, navigation}){
 
     return(
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} >
+        <ScrollView>
         <View style={styles.main}>
             
             <View style={styles.header}>
@@ -34,31 +35,29 @@ export default function NoteEditor({ route, navigation}){
                 </View>
 
                 <Text style={styles.titleText}>{note.title}</Text>
+
             </View>
 
-
+        
             {EditMode == 0 ?  <NoteEditorView body={body} pressHandler={pressHandler} /> : <NoteEditorEdit body={body} pressHandler={pressHandler} editNote={editNote} /> }
           
 
-            
-
         </View>
+        </ScrollView>
         </TouchableWithoutFeedback >
     )
 }
 
 const styles = StyleSheet.create({
     main : {
-        flex: 1,
+       flex: 1,
         backgroundColor: '#eee',
         flexDirection: 'column',
-        alignItems: 'stretch',
-        margin: 8,
-        justifyContent: 'flex-start'
+        margin: 8
     },
 
     header: {
-        flexDirection: 'column',
+       flexDirection: 'column',
         alignItems: 'center',
         flex: 1
     },

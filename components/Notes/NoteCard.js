@@ -9,10 +9,13 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Avatar } from "react-native-elements";
+import { NavigationContainer } from "@react-navigation/native";
 
-export default function NoteCard({ note }) {
+export default function NoteCard({ note, navigation }) {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.navigate('NoteEditor', {
+      note: note
+    })}>
       <View style={styles.noteCard}>
         <View style={styles.topBar}>
           <Text style={{ flex: 9 }}>{note.date}</Text>
