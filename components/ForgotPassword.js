@@ -1,12 +1,27 @@
 import React from "react";
 import { useState } from "react";
+import { styles } from "../assets/StyleSheet.js"
 import {
   StyleSheet,
   Text,
   View,
+  Image,
   TextInput,
   TouchableOpacity,
+  Keyboard,
+  Animated,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
 } from "react-native";
+
+// Dismiss the Keyboard by touching anywhere on the screen using
+// the TouchableWithoutFeedback and Keyboard package to create a handler component
+const DismissKeyboard = ({ children }) => (
+  <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    {children}
+  </TouchableWithoutFeedback>
+)
+
 export default function ForgotPassword({navigation}) {
   const [email, setEmail] = useState("");
   function resetPasswordEmail() {
@@ -17,91 +32,41 @@ export default function ForgotPassword({navigation}) {
     } else {
       alert("Please enter your email");
     }
-}
+  }
+
+  function backToLogin() {
+    Keyboard.dismiss();
+    navigation.navigate("Login");
+  }
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Enter your email address to reset your password</Text>
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Email..."
-          placeholderTextColor="white"    
-          onChangeText={(email) => setEmail(email)}
-        />
-        </View>
-        <TouchableOpacity style={styles.resetPasswordEmailButton} onPress={() => resetPasswordEmail()}>
-        <Text >Enter</Text>
-      </TouchableOpacity>
+    <React.Fragment>
+      <View style={styles.headerBar}>
+        <TouchableOpacity style={styles.backBtn} onPress={() => backToLogin()}>
+          <Text style={styles.backBtnText}>&#8592;</Text>
+        </TouchableOpacity>
+
+        <Image style={styles.headerBarImg} source={require("../assets/goodwill-text-transparent.png")}/>
+
+        <View style={styles.backBtn}/>
       </View>
-    
+      <DismissKeyboard>
+        <KeyboardAvoidingView style={styles.container}>
+          <Text style={styles.headerText}>Enter your email address</Text>
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="Email"
+              placeholderTextColor="#7a7a7a"
+              onChangeText={(email) => setEmail(email)}
+            />
+          </View>
+          <TouchableOpacity style={styles.mainBtn} onPress={() => resetPasswordEmail()}>
+              <Text style={styles.mainBtnText}>Enter</Text>
+          </TouchableOpacity>
+          </KeyboardAvoidingView>
+        </DismissKeyboard>
+      </React.Fragment>
+
   );
 }
-
-const styles = StyleSheet.create({
-  text: {
-    color: "black",
-    fontSize: 20,
-    padding: 10,
-  },
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  image: {
-    marginBottom: 40,
-    width: "80%",
-    height: "50%",
-  },
-
-  inputView: {
-    backgroundColor: "blue",
-    borderRadius: 30,
-    width: "70%",
-    height: 45,
-    marginBottom: 20,
-    alignItems: "center",
-  },
-
-  TextInput: {
-    height: 50,
-    flex: 1,
-    padding: 10,
-    marginLeft: 0,
-    width: "100%",
-    textAlign: "center",
-    color: "white",
-  },
-
-  forgot_button: {
-    height: 30,
-    marginBottom: 30,
-    textAlign: "center",
-  },
-  resetPasswordEmailButton: {
-    width: "20%",
-    borderRadius: 25,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 40,
-    backgroundColor: "#009dff",
-  },
-
-  loginBtn: {
-    width: "80%",
-    borderRadius: 25,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 40,
-    backgroundColor: "#009dff",
-  },
-  headerText: {
-    fontSize: 20,
-    color: "black",
-    padding: 20,
-  },
-});
