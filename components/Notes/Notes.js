@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import NoteCard from './NoteCard'
+import { styles } from "./NotesStyleSheet"
 
 export default function Notes({navigation}){
 
@@ -14,9 +15,9 @@ export default function Notes({navigation}){
 
 
     return(
-        <View style={styles.notes}> 
+        <View style={styles.notes}>
 
-            <FlatList 
+            <FlatList
                 keyExtractor={(item) => item.id}
                 data={notes}
                 renderItem={({item}) => (
@@ -24,22 +25,9 @@ export default function Notes({navigation}){
                     <NoteCard note={item} navigation={navigation}/>
                 )}
             >
-                
+
             </FlatList>
-           
+
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    notes: {
-        flex: 1,
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        flexDirection: 'column',
-        alignItems: 'stretch'
-       
-    
-    }
-})
-

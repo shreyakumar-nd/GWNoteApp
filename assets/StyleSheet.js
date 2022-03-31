@@ -93,6 +93,35 @@ export const styles = StyleSheet.create({
     marginTop: "8%",
     resizeMode: 'contain',
     alignSelf: "center",
-  }
+  },
+
+  mapContainer: {
+    flex: 5,
+    margin: "5%",
+    borderRadius: 8
+  },
+
+  mapView: {
+    flex: 1,
+    borderRadius: 8,
+    zIndex: 1
+  },
+
+  mainMapView: {
+    flex: 1
+  },
+
+  containerHome: {
+    backgroundColor: "white",
+    flex: 1
+  },
+
+  button: {
+    marginTop: 24,
+    padding: 30,
+    backgroundColor: "#ddd",
+    fontSize: 24,
+    marginHorizontal: 10,
+  },
 
 });
