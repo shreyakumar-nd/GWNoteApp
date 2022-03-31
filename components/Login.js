@@ -12,6 +12,7 @@ import {
   Animated,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
+
 } from "react-native";
 // import { ReactModules } from "../assets/index.js";
 
@@ -45,7 +46,7 @@ export default function Login({ navigation }) {
     // for testing uncomment below so you do not have to input something for login
     Keyboard.dismiss();
     navigation.navigate("MainTabNavigator");
-    {/*
+    /*
     if (email.length > 0 && password.length > 0 && (email == temp.email && password == temp.password)) {
         setEmail("");
         setPassword("");
@@ -53,7 +54,7 @@ export default function Login({ navigation }) {
       } else {
         alert("Incorrect email or password");
       }
-    */}
+    */
   }
 
 
