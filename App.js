@@ -17,6 +17,7 @@ import Profile from "./components/Profile";
 import IndividualContact from "./components/IndividualContact";
 import ContactPage from './components/ContactPage';
 import AddContact from './components/AddContact'
+import Map from './components/Map';
 
 
 const Stack = createNativeStackNavigator();
@@ -28,7 +29,7 @@ const CustomizableHeader = () => {
       <View style={{width: '40%'}}/>
       <Text style={{fontSize: 15, fontWeight: 'bold'}}>Contacts</Text>
       <View style={{ width: '27.5%' }} />
-      <TouchableOpacity style={{width: '15%', alignItems: 'center'}}> 
+      <TouchableOpacity style={{width: '15%', alignItems: 'center'}}>
         <Ionicons name={'add'} size={30} color={'cornflowerblue'} />
       </TouchableOpacity>
     </View>
@@ -61,6 +62,7 @@ const MainTabNavigator = () => {
       })}
       >
       <Tab.Screen name="Home" component={Home} />
+
       <Tab.Screen name="Contacts" component={Contacts} options={{ headerTitle: (props) => <CustomizableHeader {...props} /> }}/>
       <Tab.Screen name="Notes" component={NoteNavigator} />
       <Tab.Screen name="Resources" component={Resources} />
@@ -78,12 +80,6 @@ export default function App() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="MainTabNavigator"
-          component={MainTabNavigator}
-          options={{ headerShown: false }}
-          navigationOptions={{ headerShown: false }}
-        />
-        <Stack.Screen
           name="CreateAccount"
           component={CreateAccount}
           options={{ headerShown: false }}
@@ -98,17 +94,28 @@ export default function App() {
           component={ResetPassword}
           options={{ headerShown: false }}
         />
+
+        <Stack.Screen
+          name="Map"
+          component={Map}
+          options={{ headerShown: true }}
+          navigationOptions={{ headerShown: true }}
+        />
+        <Stack.Screen
+          name="MainTabNavigator"
+          component={MainTabNavigator}
+          options={{ headerShown: false }}
+          navigationOptions={{ headerShown: false }}
+        />
         <Stack.Screen
           name="Profile"
           component={Profile}
           options={{ headerShown: false }}
         />
-
-        <Stack.Screen 
+        <Stack.Screen
           name="IndividualContact"
           component={IndividualContact}
         />
-        
         <Stack.Screen
           name="ContactPage"
           component={ContactPage}
@@ -120,7 +127,7 @@ export default function App() {
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
-      
+
     </NavigationContainer>
   );
 }
