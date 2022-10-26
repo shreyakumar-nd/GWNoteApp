@@ -16,7 +16,7 @@ export default function Contacts({ navigation: { navigate } }) {
   const [contacts, setContants] = useState([ 
     {
       index: 0,
-      name: "Danny Sullivan"
+      name: "Nicole Mellert"
     },
     {
       index: 1,
@@ -161,6 +161,10 @@ export default function Contacts({ navigation: { navigate } }) {
     {
       index: 36,
       name: "Amy Hills"
+    },
+    {
+      index: 37,
+      name: "Nicole Mellert"
     }
 
   ])

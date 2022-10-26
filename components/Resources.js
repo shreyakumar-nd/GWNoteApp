@@ -13,9 +13,9 @@ export default function Resources({ navigation }) {
     let link;
 
     if (resource == 'Local Resources') {
-      link = 'https://southbendin.gov/covid-19-resources-support/';
+      link = 'https://southbendin.gov';
     } else if (resource == 'Support Documentation') {
-      link = 'https://southbendin.gov/covid-19-resources-support/';
+      link = 'https://southbendin.gov/supporting-south-bend/';
     } else if (resource == 'Goodwill Personnel') {
       link = 'https://goodwill-ni.org/contact/';
     }
