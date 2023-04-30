@@ -1,58 +1,71 @@
-import React, { useState, useRef } from "react";
-import { Contact } from "./Classes/Contact";
-import { Avatar } from "react-native-elements";
+import React, { useState, useRef, useEffect } from "react";
 
 import {
   StyleSheet,
   Text,
   View,
-  Image,
   TextInput,
   Button,
   TouchableOpacity,
 } from "react-native";
-let user = null;
+
 export default function AddContact({ navigation }) {
-  let user1 = new Contact(
-    2,
-    "Test1@nd.edu",
-    "Billy",
-    "Smith",
-    "9122347890",
-    "1349 E Ewing Ave, South Bend, IN 46613",
-    "normal",
-    "#Group 1",
-    "BS",
-    "Notes"
-  );
-  let user = new Contact();
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [contactType, setContactType] = useState("");
-  const [group, setGroup] = useState("");
-  const [notes, setNotes] = useState("");
-  const [address, setAddress] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [affiliation, setAffiliation] = useState("");
+  const [workerID, setWorkerID] = useState(null);
   const [editable, setEditable] = useState(true);
-  function saveContact(usr) {
-    if (editable) {
-      setEditable(false);
-      let initials = firstName[0] + lastName[0];
-      user = usr.update(
-        1,
-        email,
-        firstName,
-        lastName,
-        phoneNumber,
-        address,
-        contactType,
-        group,
-        initials,
-        notes
-      );
-      //run db update function route
-      navigation.goBack();
+
+  useEffect(() => {
+    const fetchWorkerCount = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/count-workers");
+        if (response.ok) {
+          const jsonResponse = await response.json();
+          setWorkerID(jsonResponse.count + 1);
+        } else {
+          console.error("Failed to fetch worker count");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchWorkerCount();
+  }, []);
+
+  async function saveContact() {
+    
+    if (workerID === null) {
+      console.error("workerID not fetched");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:3000/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          workerID,
+          email,
+          firstName,
+          lastName,
+          affiliation,
+          phoneNumber,
+        }),
+      });
+
+      if (response.ok) {
+        navigation.goBack();
+      } else {
+        console.error("Failed to add worker");
+      }
+    } catch (error) {
+      console.error("Error:", error);
     }
   }
 
@@ -68,7 +81,6 @@ export default function AddContact({ navigation }) {
             size: 20,
             color: "white",
           }}
-          title="Back"
         />
       </View>
       <View style={styles.container}>
@@ -114,34 +126,15 @@ export default function AddContact({ navigation }) {
         <View style={styles.inputView}>
           <TextInput
             style={styles.TextInput}
-            editable={editable}
-            placeholder="Address"
-            placeholderTextColor="white"
-            onChangeText={(address) => setAddress(address)}
-          />
-        </View>
-        <View style={styles.inputView}>
-          <TextInput
-            style={styles.TextInput}
-            placeholder="Contact Type"
+            placeholder="Affiliation"
             editable={editable}
             placeholderTextColor="white"
-            onChangeText={(contactType) => setContactType(contactType)}
-          />
-        </View>
-        <View style={styles.inputView}>
-          <TextInput
-            style={styles.TextInput}
-            placeholder="Group Name"
-            editable={editable}
-            placeholderTextColor="white"
-            onChangeText={(group) => setGroup(group)}
+            onChangeText={(affiliation) => setAffiliation(affiliation)}
           />
         </View>
         <TouchableOpacity
-          
           style={styles.enterButton}
-          onPress={() => saveContact(user)}
+          onPress={() => saveContact()}
         >
           <Text>Save</Text>
         </TouchableOpacity>

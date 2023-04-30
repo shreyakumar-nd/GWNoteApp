@@ -5,6 +5,7 @@ import {
   View,
   SectionList,
   TouchableOpacity,
+  TouchableHighlight,
 } from "react-native";
 import { Link } from "@react-navigation/native";
 
@@ -42,8 +43,15 @@ export default function Contacts({ navigation: { navigate } }) {
 
   return (
     <View style={styles.container}>
+      <TouchableHighlight
+        style={styles.addWorkerButton}
+        onPress={() => navigate("AddContact")}
+      >
+        <Text style={styles.addWorkerButtonText}>Add Worker</Text>
+      </TouchableHighlight>
       <SectionList
         sections={getData()}
+        contentContainerStyle={styles.listContent}
         renderItem={({ item }) => (
           <View>
             <TouchableOpacity
@@ -79,6 +87,18 @@ const styles = StyleSheet.create({
     paddingRight: 38,
     paddingTop: 62,
     paddingBottom: 40,
+  },
+  addWorkerButton: {
+    backgroundColor: "#2196F3",
+    borderRadius: 4,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    alignSelf: "flex-start",
+    marginBottom: 20,
+  },
+  addWorkerButtonText: {
+    color: "#FFF",
+    fontSize: 14,
   },
   row: {
     paddingHorizontal: 0,
