@@ -4,290 +4,117 @@ import {
   Text,
   View,
   SectionList,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
 import { Link } from "@react-navigation/native";
-import { ScrollView } from "react-native-gesture-handler";
-import { Contact } from "./Classes/Contact";
-import ContactsTopBar from "./ContactsTopBar";
-import IndividualContact from "./IndividualContact";
 
-
-import { FlatList } from 'react-native';
-
-const ContactsPage = () => {
+export default function Contacts({ navigation: { navigate } }) {
   const [contacts, setContacts] = useState([]);
 
-
-// fetch('http://example.com/myservice')
-//   .then(response => {
-//     // Add CORS headers to the response
-//     response.headers.set('Access-Control-Allow-Origin', '*');
-//     response.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-//     response.headers.set('Access-Control-Allow-Headers', 'Content-Type');
-    
-//     // Your code to handle the response
-//     // ...
-//   })
-//   .catch(error => {
-//     // Handle error
-//     console.log(error);
-//   });
-
-
   useEffect(() => {
-    fetch('http://gwnoteserver.azurewebsites.net/all')
-      .then(response => response.json())
-      .then(response => { 
-      response.headers.set('Access-Control-Allow-Origin', '*');
-      response.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-      response.headers.set('Access-Control-Allow-Headers', 'Content-Type');
-
-  })
-      .then(data => setContacts(data))
-      .catch(error => console.error(error));
+    fetch("http://localhost:3000/workers")
+      .then((response) => response.json())
+      .then((data) => setContacts(data))
+      .catch((error) => console.error(error));
   }, []);
 
-  const renderItem = ({ item }) => {
-    return (
-      <View>
-        <Text>{item.name}</Text>
-        <Text>{item.email}</Text>
-      </View>
-    );
+  const getData = () => {
+    let contactsArr = [];
+    let aCode = "A".charCodeAt(0);
+    for (let i = 0; i < 26; i++) {
+      let currChar = String.fromCharCode(aCode + i);
+      let obj = {
+        title: currChar,
+      };
+
+      let currContacts = contacts.filter((item) => {
+        return item.firstName[0].toUpperCase() === currChar;
+      });
+      if (currContacts.length > 0) {
+        currContacts.sort((a, b) => a.firstName.localeCompare(b.firstName));
+        obj.data = currContacts;
+        contactsArr.push(obj);
+      }
+    }
+
+    return contactsArr;
   };
 
   return (
-    <FlatList
-      data={contacts}
-      renderItem={renderItem}
-      keyExtractor={item => item.id}
-    />
+    <View style={styles.container}>
+      <SectionList
+        sections={getData()}
+        renderItem={({ item }) => (
+          <View>
+            <TouchableOpacity
+              style={styles.row}
+              onPress={() => navigate("IndividualContact", { worker: item })}
+            >
+              <View style={styles.contact}>
+                <View style={styles.ellipse} />
+                <Text style={styles.name}>
+                  {item.firstName} {item.lastName}
+                </Text>
+              </View>
+            </TouchableOpacity>
+            <View style={styles.separator} />
+          </View>
+        )}
+        renderSectionHeader={({ section }) => (
+          <View style={styles.sectionHeader}>
+            <Text>{section.title}</Text>
+          </View>
+        )}
+        keyExtractor={(item) => item.workerID.toString()}
+      />
+    </View>
   );
-};
+}
 
-export default ContactsPage;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "rgba(255,255,255,1)",
+    paddingLeft: 20,
+    paddingRight: 38,
+    paddingTop: 62,
+    paddingBottom: 40,
+  },
+  row: {
+    paddingHorizontal: 0,
+    paddingVertical: 10,
+  },
+  contact: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    marginRight: 15,
+  },
+  ellipse: {
+    width: 60,
+    height: 60,
+    marginRight: 20,
+    borderRadius: 30,
+    backgroundColor: "rgba(217,217,217,1)",
+  },
+  name: {
+    color: "rgba(0,0,0,1)",
+    fontSize: 16,
+    lineHeight: 16,
+    fontFamily: "Helvetica Neue, sans-serif",
+    fontWeight: "500",
+  },
+  separator: {
+    width: "90%",
+    alignSelf: "center",
+    height: 1,
+    backgroundColor: "#efefef",
+  },
+  sectionHeader: {
+    backgroundColor: "#efefef",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+  },
+});
 
-// export default function Contacts({ navigation: { navigate } }) {
-//   const [contacts, setContants] = useState([ 
-//     {
-//       index: 0,
-//       name: "Nicole Mellert"
-//     },
-//     {
-//       index: 1,
-//       name: "Jesse Hooper"
-//     },
-//     {
-//       index: 2,
-//       name: "Reid Zavala"
-//     },
-//     {
-//       index: 3,
-//       name: "Milo Alvarado"
-//     },
-//     {
-//       index: 4,
-//       name: "Tiara Hinton"
-//     },
-//     {
-//       index: 5,
-//       name: "Zion Bowers"
-//     },
-//     {
-//       index: 6,
-//       name: "Rebekah Case"
-//     },
-//     {
-//       index: 7,
-//       name: "Landin Landry"
-//     },
-//     {
-//       index: 8,
-//       name: "Nevaeh Hicks"
-//     },
-//     {
-//       index: 9,
-//       name: "Shyanne Kerr"
-//     },
-//     {
-//       index: 10,
-//       name: "Yaretzi Bryan"
-//     },
-//     {
-//       index: 11,
-//       name: "Ramos Bauer"
-//     },
-//     {
-//       index: 12,
-//       name: "Humberto Lester"
-//     },
-//     {
-//       index: 13,
-//       name: "Sienna Knight"
-//     },
-//     {
-//       index: 14,
-//       name: "Allen Jensen"
-//     },
-//     {
-//       index: 15,
-//       name: "Shaniya Wood"
-//     },
-//     {
-//       index: 16,
-//       name: "Brielle Pacheco"
-//     },
-//     {
-//       index: 17,
-//       name: "Mira Fry"
-//     },
-//     {
-//       index: 18,
-//       name: "Rachel Beck"
-//     },
-//     {
-//       index: 19,
-//       name: "Lina Bowers"
-//     },
-//     {
-//       index: 20,
-//       name: "Vance Nichols"
-//     },
-//     {
-//       index: 21,
-//       name: "Elian Herring"
-//     },
-//     {
-//       index: 22,
-//       name: "Kristin Estes"
-//     },
-//     {
-//       index: 23,
-//       name: "Trevor Beasley"
-//     },
-//     {
-//       index: 24,
-//       name: "Weston Haynes"
-//     },
-//     {
-//       index: 25,
-//       name: "Dayton Ferguson"
-//     },
-//     {
-//       index: 26,
-//       name: "Gemma Harper"
-//     },
-//     {
-//       index: 27,
-//       name: "Jordan Frye"
-//     },
-//     {
-//       index: 28,
-//       name: "Charlie Tyler"
-//     },
-//     {
-//       index: 29,
-//       name: "Maeve Graves"
-//     },
-//     {
-//       index: 30,
-//       name: "Ronan Mills"
-//     },
-//     {
-//       index: 31,
-//       name: "Donovan Riddle"
-//     },
-//     {
-//       index: 32,
-//       name: "Matteo Zuniga"
-//     },
-//     {
-//       index: 33,
-//       name: "Denise Booth"
-//     },
-//     {
-//       index: 34,
-//       name: "Audrey Mill"
-//     },
-//     {
-//       index: 35,
-//       name: "Austin Humphrey"
-//     },
-//     {
-//       index: 36,
-//       name: "Amy Hills"
-//     },
-//     {
-//       index: 37,
-//       name: "Nicole Mellert"
-//     }
-
-//   ])
-
-
-//   const getData = () => {
-//     let contactsArr = [];
-//     let aCode = "A".charCodeAt(0);
-//     for (let i = 0; i < 26; i++) {
-//       let currChar = String.fromCharCode(aCode + i);
-//       let obj = {
-//         title: currChar
-//       };
-
-//       let currContacts = contacts.filter(item => {
-//         return item.name[0].toUpperCase() === currChar;
-//       });
-//       if (currContacts.length > 0) {
-//         currContacts.sort((a, b) => a.name.localeCompare(b.name));
-//         obj.data = currContacts;
-//         contactsArr.push(obj);
-//       }
-//     }
-
-//     return contactsArr;
-//   };
-
-//   return(
-//     <View style={styles.container}>
-
-//       <SectionList
-//         sections={getData()}
-//         renderItem={({ item }) => (
-//           <View>
-//             <TouchableOpacity style={styles.row} onPress={() => navigate('IndividualContact')}>
-//               <Text>{item.name}</Text>
-//             </TouchableOpacity>
-     
-//             <View style={{width: '90%', alignSelf: 'center', height: 1, backgroundColor: '#efefef'}}/> 
-//           </View>
-//         )}
-//         renderSectionHeader={({ section }) => (
-//           <View style={styles.sectionHeader}>
-//             <Text>{section.title}</Text>
-//           </View>
-//         )}
-//         keyExtractor={item => item.index}
-//       />
-//     </View>
-    
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: "#fff",
-//     flexDirection: "row",
-//     alignSelf: "stretch",
-//   },
-//   row: {
-//     paddingHorizontal: 20,
-//     paddingVertical: 10, 
-//   },
-//   sectionHeader: {
-//     backgroundColor: "#efefef",
-//     paddingHorizontal: 20,
-//     paddingVertical: 10, 
-//   }
-// });
