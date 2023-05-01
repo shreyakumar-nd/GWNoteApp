@@ -21,7 +21,7 @@ export default function AddContact({ navigation }) {
   useEffect(() => {
     const fetchWorkerCount = async () => {
       try {
-        const response = await fetch("http://localhost:3000/count-workers");
+        const response = await fetch("https://gwnoteserver.azurewebsites.net/count-workers");
         if (response.ok) {
           const jsonResponse = await response.json();
           setWorkerID(jsonResponse.count + 1);
@@ -44,7 +44,7 @@ export default function AddContact({ navigation }) {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/create", {
+      const response = await fetch("https://gwnoteserver.azurewebsites.net/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -114,7 +114,6 @@ export default function AddContact({ navigation }) {
 
         <View style={styles.inputView}>
           <TextInput
-            editable={false}
             editable={editable}
             style={styles.TextInput}
             placeholder="Phone Number"

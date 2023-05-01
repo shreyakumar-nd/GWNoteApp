@@ -13,7 +13,7 @@ export default function Contacts({ navigation: { navigate } }) {
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/workers")
+    fetch("https://gwnoteserver.azurewebsites.net/workers")
       .then((response) => response.json())
       .then((data) => setContacts(data))
       .catch((error) => console.error(error));
