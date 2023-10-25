@@ -1,17 +1,28 @@
 import React, {useState} from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import NoteCard from './NoteCard'
+import { set } from 'react-native-reanimated';
 
 export default function Notes({navigation}){
+    const [searchTerm, setSearchTerm] = useState("");
+
+
 
 
     const [notes, setNotes] = useState([
-        {id: '1', date: '1/2/2021', title: 'Note 1', body: 'lorem ip sem olam', author: 'Pablo', collabs: [{name: 'James', id: '1'}, {name: 'Shreya', id: '3'}], level: 'Moderately Urgent'},
-        {id: '2', date: '3/4/2021', title: 'Note 2', body: 'lorem ip sem olam', author: 'Connor', collabs: [{name: 'James', id: '1'}, {name: 'Grace', 'id': 2}, {name: 'Shreya', id: '3'}], level: 'Negligible'},
-        {id: '3', date: '6/19/2021', title: 'Note 3', body: 'lorem ip sem olam', author: 'Yorch', collabs: [{name: 'James', id: '1'}, {name: 'Grace', 'id': 2}, {name: 'Shreya', id: '3'}], level: 'Incidental'},
-        {id: '4', date: '11/2/2021', title: 'Note 4', body: 'lorem ip sem olam', author: 'Morris', collabs: [{name: 'James', id: '1'}, {name: 'Grace', 'id': 2}, {name: 'Shreya', id: '3'}, {name: 'Bert', id: '4'}], level: 'Urgent'}
-    ])
-
+        {id: '1', date: '1/2/2021', title: 'Move Shoes to Warehouse', body: 'Donation of shoes needs to be relocated to the warehouse.', author: 'Pablo', collabs: [{name: 'James', id: '1'}, {name: 'Shreya', id: '3'}], level: 'Moderately Urgent'},
+        {id: '2', date: '3/4/2021', title: 'Sort Clothing Donations', body: 'Please categorize and organize donated clothes.', author: 'Connor', collabs: [{name: 'James', id: '1'}, {name: 'Grace', 'id': 2}, {name: 'Shreya', id: '3'}], level: 'Not Urgent'},
+        {id: '3', date: '6/19/2021', title: 'Display Collectibles', body: 'Unique collectibles for display in the store.', author: 'Yorch', collabs: [{name: 'James', id: '1'}, {name: 'Grace', 'id': 2}, {name: 'Shreya', id: '3'}], level: 'Moderately Urgent'},
+        {id: '4', date: '11/2/2021', title: 'Urgent Supply Request', body: 'Request for urgent supply restocking.', author: 'Morris', collabs: [{name: 'James', id: '1'}, {name: 'Grace', 'id': 2}, {name: 'Shreya', id: '3'}, {name: 'Bert', id: '4'}], level: 'Urgent'},
+        {id: '5', date: '2/7/2022', title: 'Volunteer Scheduling', body: 'Plan schedules for upcoming volunteers.', author: 'Linda', collabs: [], level: 'Not Urgent'},
+        {id: '6', date: '5/15/2022', title: 'Donation Pickup Coordination', body: 'Coordinate the pickup of large furniture donations.', author: 'Alex', collabs: [{name: 'Grace', 'id': 2}, {name: 'Shreya', id: '3'}, {name: 'Bert', id: '4'}], level: 'Not Urgent'},
+        {id: '7', date: '9/22/2022', title: 'Event Planning Meeting', body: 'Schedule a meeting to discuss upcoming events.', author: 'Sophia', collabs: [{name: 'James', id: '1'}, {name: 'Grace', 'id': 2}], level: 'Moderately Urgent'},
+        {id: '8', date: '12/1/2022', title: 'Inventory Audit', body: 'Conduct an audit of inventory in the store.', author: 'Emily', collabs: [{name: 'James', id: '1'}, {name: 'Grace', 'id': 2}, {name: 'Bert', id: '4'}], level: 'Urgent'},
+        {id: '9', date: '3/9/2023', title: 'Donation Pickup Request', body: 'Request for a donation pickup from a local donor.', author: 'Aiden', collabs: [{name: 'Shreya', id: '3'}, {name: 'Bert', id: '4'}], level: 'Moderately Urgent'},
+        {id: '10', date: '6/18/2023', title: 'Marketing Campaign Meeting', body: 'Discuss and plan a marketing campaign for the organization.', author: 'Mia', collabs: [{name: 'James', id: '1'}, {name: 'Grace', 'id': 2}, {name: 'Shreya', id: '3'}, {name: 'Bert', id: '4'}], level: 'Not Urgent'}
+    ]);
+    
+    
 
     return(
         <View style={styles.notes}> 
@@ -37,9 +48,9 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         flexDirection: 'column',
-        alignItems: 'stretch'
-       
+        alignItems: 'stretch',
+        backgroundColor: '#fff',
     
-    }
+    },
 })
 
