@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View, TextInput } from 'react-native';
 import NoteCard from './NoteCard'
 import { set } from 'react-native-reanimated';
 
@@ -26,16 +26,20 @@ export default function Notes({navigation}){
 
     return(
         <View style={styles.notes}> 
+            <TextInput
+                style={styles.searchInput}
+                placeholder="Search notes..."
+                value={searchTerm}
+                onChangeText={(text) => setSearchTerm(text)}
+            />
 
             <FlatList 
                 keyExtractor={(item) => item.id}
                 data={notes}
                 renderItem={({item}) => (
-
                     <NoteCard note={item} navigation={navigation}/>
                 )}
             >
-                
             </FlatList>
            
         </View>
@@ -52,5 +56,19 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     
     },
+    searchInput: {
+        height: 40,
+        width: "80%",
+        borderRadius: 9,
+        borderWidth: 1,
+        borderColor: "#ccc",
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+        alignSelf: "center",
+        marginBottom: 20,
+        marginTop: 20,
+        
+      }
+
 })
 

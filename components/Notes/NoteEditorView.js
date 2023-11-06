@@ -9,7 +9,7 @@ export default function NoteEditorView({body, pressHandler}){
     
             <View style={styles.textBody}>
                 <ScrollView>
-                    <Text style={{fontSize: 20}}>{body}</Text>
+                    <Text style={styles.text}>{body}</Text>
                 </ScrollView>
             </View>
 
@@ -28,15 +28,22 @@ export default function NoteEditorView({body, pressHandler}){
 const styles = StyleSheet.create({
     
     textBody: {
-        backgroundColor: '#ddd',
+        backgroundColor: "#1E2330",
+        fontColor: '#FFFFFF',
         padding: 20,
         margin: 2,
         flex: 5,
         marginTop: 20,
-        borderRadius: 20
+        borderRadius: 20,
+        
     },
 
     bottomBar: {
        flex: 1
+    },
+
+    text: {
+        color: '#ddd',
+        fontSize: 20,
     }
 })
