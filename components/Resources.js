@@ -30,7 +30,7 @@ export default function Resources({ navigation }) {
         data={resourceLinks}
         renderItem={({ item }) => (
           <TouchableOpacity style={styles.button} onPress={() => handlePress(item.name)}>
-              <Text style={{fontSize: 20, alignSelf: 'center'}}>{item.name}</Text>
+              <Text style={{fontSize: 20, alignSelf: 'center', color:'#FFF'}}>{item.name}</Text>
           </TouchableOpacity>
         )}
       />
@@ -46,8 +46,9 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 25,
     padding: 30,
-    backgroundColor: "#ddd",
+    backgroundColor: "#1E2330",
     width: '90%', 
-    alignSelf: 'center'
+    alignSelf: 'center',
+    borderRadius: 20,
   },
 });

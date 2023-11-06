@@ -92,7 +92,7 @@ const Contacts = ({ navigation }) => {
           )}
           renderSectionHeader={({ section }) => (
             <View style={styles.sectionHeader}>
-              <Text>{section.title}</Text>
+              <Text style={styles.headerText}>{section.title}</Text>
             </View>
           )}
           keyExtractor={(item) => String(item.workerID)}
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10, 
   },
   sectionHeader: {
-    backgroundColor: "#efefef",
+    backgroundColor: "#1E2330",
     paddingHorizontal: 20,
     paddingVertical: 10, 
   },
@@ -134,6 +134,9 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     alignSelf: "center",
     marginBottom: 20,
+  },
+  headerText: {
+    color: "#fff",
   },
 });
 
