@@ -18,50 +18,52 @@ export default function NoteCard({ note, navigation }) {
     })}>
       <View style={styles.noteCard}>
         <View style={styles.topBar}>
-          <Text style={{ flex: 9 }}>{note.date}</Text>
-          {note.level.includes("Urgent") ? (
+          {note.level === "Urgent" ? (
             <AntDesign
-              style={{ alignSelf: "flex-end", flex: 1 }}
+              style={{ marginRight: 5 }}
+              name="star"
+              size={24}
+              color="red"
+            />
+          ) : note.level === "Moderately Urgent" ? (
+            <AntDesign
+              style={{ marginRight: 5 }}
               name="star"
               size={24}
               color="yellow"
             />
-          ) : (
-            <Text></Text>
-          )}
-        </View>
-
-        <View style={styles.lowerHalf}>
-          <FlatList
-            style={{ flex: 1 }}
-            keyExtractor={(item) => item.id}
-            numColumns={3}
-            data={note.collabs}
-            renderItem={({ item }) => (
-              <View style={styles.icon}>
-                <Avatar
-                  rounded
-                  backgroundColor="#28fc08"
-                  size="small"
-                  title={item.name[0]}
-                />
-              </View>
+          ) : note.level === "Not Urgent" ? (
+            <AntDesign
+              style={{ marginRight: 5 }}
+              name="star"
+              size={24}
+              color="green"/>
+            ) : (
+              <Text></Text>
             )}
-          />
-
           <Text
             style={{
               flex: 2,
-              alignSelf: "center",
-              textAlign: "left",
-              marginLeft: "10%",
+              fontSize: 30,
+              alignSelf: "left",
+              color: "#f9c2ff",
             }}
           >
             {note.title}
           </Text>
         </View>
+        
 
-        <Text style={styles.levelText}>Level: {note.level}</Text>
+        <View style={styles.lowerHalf}>
+          <Text style={styles.levelText}>Level: {note.level}</Text>
+          <Text style={styles.levelText}>Author: {note.author}</Text>
+          <Text style={styles.levelText}>Date: {note.date}</Text>
+
+
+          
+        </View>
+
+        
       </View>
     </TouchableOpacity>
   );
@@ -71,10 +73,11 @@ const styles = StyleSheet.create({
   noteCard: {
     margin: 10,
     padding: 10,
-    backgroundColor: "#ddd",
+    backgroundColor: "#1E2330",
     borderRadius: 8,
     flex: 1,
     flexDirection: "column",
+    color: "#fff",
   },
 
   topBar: {
@@ -86,16 +89,21 @@ const styles = StyleSheet.create({
   },
 
   lowerHalf: {
-    flex: 4,
-    alignSelf: "center",
-    padding: 5,
-    alignItems: "stretch",
-    flexDirection: "row",
+    marginTop: 5,
+    marginLeft: 30,
+    marginRight: 30,
+    padding: 10,
+    borderRadius: 8,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "left",
+    alignItems: "left",
   },
 
   levelText: {
-    flex: 1,
-    alignSelf: "flex-end",
+    fontSize: 28,
+    color: "#ECEFF4",
+    marginBottom: 5,
   },
 
   icon: {
