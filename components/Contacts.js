@@ -4,7 +4,8 @@ import {
   Text,
   View,
   SectionList,
-  TouchableOpacity
+  TouchableOpacity,
+  TextInput
 } from "react-native";
 import { Link } from "@react-navigation/native";
 import { ScrollView } from "react-native-gesture-handler";
@@ -13,6 +14,7 @@ import ContactsTopBar from "./ContactsTopBar";
 import IndividualContact from "./IndividualContact";
 
 export default function Contacts({ navigation: { navigate } }) {
+  const [searchTerm, setSearchTerm] = useState("");
   const [contacts, setContants] = useState([ 
     {
       index: 0,
@@ -192,8 +194,16 @@ export default function Contacts({ navigation: { navigate } }) {
     return contactsArr;
   };
 
-  return(
+  return (
     <View style={styles.container}>
+      <Text style={styles.h1}>Contacts & Groups</Text>
+
+      <TextInput
+        style={styles.searchInput}
+        placeholder="Search contacts..."
+        value={searchTerm}
+        onChangeText={(text) => setSearchTerm(text)}
+      />
 
       <SectionList
         sections={getData()}
@@ -202,8 +212,8 @@ export default function Contacts({ navigation: { navigate } }) {
             <TouchableOpacity style={styles.row} onPress={() => navigate('IndividualContact')}>
               <Text>{item.name}</Text>
             </TouchableOpacity>
-     
-            <View style={{width: '90%', alignSelf: 'center', height: 1, backgroundColor: '#efefef'}}/> 
+
+            <View style={{ width: '90%', alignSelf: 'center', height: 1, backgroundColor: '#efefef' }} />
           </View>
         )}
         renderSectionHeader={({ section }) => (
@@ -214,15 +224,14 @@ export default function Contacts({ navigation: { navigate } }) {
         keyExtractor={item => item.index}
       />
     </View>
-    
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 2,
     backgroundColor: "#fff",
-    flexDirection: "row",
+    flexDirection: "column",
     alignSelf: "stretch",
   },
   row: {
@@ -233,5 +242,22 @@ const styles = StyleSheet.create({
     backgroundColor: "#efefef",
     paddingHorizontal: 20,
     paddingVertical: 10, 
-  }
+  },
+  h1: {
+    fontSize: 24, 
+    fontWeight: "bold", 
+    textAlign: "center", 
+    margin: 20, 
+  },
+  searchInput: {
+    height: 40,
+    width: "80%",
+    borderRadius: 9,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    alignSelf: "center",
+    marginBottom: 20,
+  },
 });

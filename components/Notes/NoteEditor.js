@@ -1,70 +1,112 @@
-import React, {useState} from 'react';
-import { StyleSheet, Text, View, Button, ScrollView, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import React, { useState } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  ScrollView,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native';
 import NoteEditorView from './NoteEditorView';
 import NoteEditorEdit from './NoteEditorEdit';
+import { AntDesign } from '@expo/vector-icons';
 
-export default function NoteEditor({ route, navigation}){
+export default function NoteEditor({ route, navigation }) {
+  const { note } = route.params;
+  const [body, setBody] = useState(note.body);
+  const [editMode, setEditMode] = useState(false);
 
-    const [body, setBody] = useState('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget sapien condimentum, pulvinar quam sed, aliquet dolor. In sodales risus a sollicitudin interdum. Suspendisse quis arcu eu nulla viverra convallis id nec tellus. Praesent sit amet volutpat turpis. Etiam et fermentum augue. Nunc efficitur fringilla odio et hendrerit. Proin a vulputate ipsum. Vestibulum lacinia magna nec arcu fringilla, non pretium velit finibus. Phasellus congue viverra dictum. Mauris pharetra lorem vel varius blandit. Mauris vehicula, orci et dignissim ultricies, dui nibh tristique nunc, sed placerat ipsum lacus et nulla. Sed malesuada non sapien sit amet imperdiet. In dapibus lorem sit amet.')
+  const pressHandler = () => {
+    setEditMode((previousMode) => !previousMode);
+  };
 
-    const {note} = route.params
+  const editNote = (newBody) => {
+    setBody(newBody);
+  };
 
-    const [EditMode, setMode] = useState(0)
+  const renderStar = () => {
+    let starColor = 'black';
 
-    const pressHandler = () => {
-        setMode( previousMode => {
-            return previousMode == 0 ? 1 : 0
-        })
+    if (note.level === 'Urgent') {
+      starColor = 'red';
+    } else if (note.level === 'Moderately Urgent') {
+      starColor = 'yellow';
+    } else if (note.level === 'Not Urgent') {
+      starColor = 'green';
     }
 
-    const editNote = (newBody) => {
-        setBody(newBody)
-    }
+    return <AntDesign name="star" size={24} color={starColor} />;
+  };
 
-    return(
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} >
-        <ScrollView>
+  return (
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <ScrollView>
         <View style={styles.main}>
-            
-            <View style={styles.header}>
-                <View style={{ alignSelf: 'flex-start'}}>
-                    <Button
-                        title="Back"
-                        onPress={() => navigation.goBack()}
-                    />
-                </View>
-
-                <Text style={styles.titleText}>{note.title}</Text>
-
+          <View style={styles.header}>
+            <View style={styles.button}>
+              <Button title="Back" onPress={() => navigation.goBack()} />
+            </View>
+            <Text style={styles.titleText}>{note.title}</Text>
+              <View style={styles.headerRowContent}>
+                {renderStar()}
+                <Text style={styles.levelText}>{note.level}</Text>
+              </View>
+            <Text style={styles.dateText}>{note.date}</Text>
+          </View>
+          <View style={styles.body}>
+            {editMode ? (
+                <NoteEditorEdit note={note} editNote={editNote} />
+            ) : (
+                <NoteEditorView note={note} body={body} />
+            )}
             </View>
 
-        
-            {EditMode == 0 ?  <NoteEditorView body={body} pressHandler={pressHandler} /> : <NoteEditorEdit body={body} pressHandler={pressHandler} editNote={editNote} /> }
-          
-
         </View>
-        </ScrollView>
-        </TouchableWithoutFeedback >
-    )
+      </ScrollView>
+    </TouchableWithoutFeedback>
+  );
 }
 
 const styles = StyleSheet.create({
-    main : {
-       flex: 1,
-        backgroundColor: '#eee',
-        flexDirection: 'column',
-        margin: 8
-    },
+  main: {
+    flex: 1,
+    flexDirection: 'column',
+    margin: 8,
+  },
+  header: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    flex: 1,
+    margin: 30,
+  },
+  headerRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  button: {
+    alignSelf: 'flex-start',
+    marginBottom: 10,
+  },
+  headerRowContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  titleText: {
+    fontSize: 30,
+    margin: 3,
+  },
+  levelText: {
+    fontSize: 27,
+    marginLeft: 5, // Adjust the margin as needed
+  },
+  dateText: {
+    fontSize: 25,
+  },
+  body: {
+    flex: 4,
+    margin: 70,
+  },
 
-    header: {
-       flexDirection: 'column',
-        alignItems: 'center',
-        flex: 1
-    },
-
-
-    titleText: {
-        fontSize: 30
-    }
-
-})
+});
