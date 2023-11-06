@@ -56,9 +56,9 @@ export default function NoteEditor({ route, navigation }) {
           </View>
           <View style={styles.body}>
             {editMode ? (
-                <NoteEditorEdit note={note} editNote={editNote} />
+                <NoteEditorEdit note={note} editNote={editNote} pressHandler={pressHandler} />
             ) : (
-                <NoteEditorView note={note} body={body} />
+                <NoteEditorView body={body} pressHandler={pressHandler} />
             )}
             </View>
 
