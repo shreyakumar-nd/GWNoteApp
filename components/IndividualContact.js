@@ -1,20 +1,22 @@
-import React, { useState } from "react";
-import {
-    StyleSheet,
-    Text,
-    View,
-    SectionList,
-    TouchableOpacity
-} from "react-native";
+import React from 'react';
+import { StyleSheet, Text, View, Image } from 'react-native';
 
-export default function IndividualContact({ navigation, route }) {
-    // Extract contactName from route params
-    const { contactName } = route.params;
+export default function IndividualContact({ route }) {
+    // Extract the contact details from route params
+    const { contactName, email, affiliation, phone } = route.params;
 
     return (
         <View style={styles.container}>
-            {/* Display the contact's name */}
-            <Text style={styles.nameText}>{contactName}</Text>
+            <View style={styles.contactHeader}>
+                {/* Placeholder image for contact - replace with actual image path if available */}
+                <Image source={{ uri: 'https://via.placeholder.com/150' }} style={styles.contactImage} />
+                <Text style={styles.nameText}>{contactName}</Text>
+            </View>
+            <View style={styles.contactInfo}>
+                <Text style={styles.contactText}>Email: {email}</Text>
+                <Text style={styles.contactText}>Affiliation: {affiliation}</Text>
+                <Text style={styles.contactText}>Phone: {phone}</Text>
+            </View>
         </View>
     );
 }
@@ -22,13 +24,35 @@ export default function IndividualContact({ navigation, route }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "blue",
-        alignSelf: "stretch",
-        justifyContent: "center",  // Center content vertically
-        alignItems: "center"       // Center content horizontally
+        backgroundColor: '#f0f0f0',
+    },
+    contactHeader: {
+        backgroundColor: 'blue',
+        paddingTop: 50,
+        paddingBottom: 20,
+        alignItems: 'center',
+        borderBottomWidth: 1,
+        borderBottomColor: '#dedede',
     },
     nameText: {
-        fontSize: 24,
-        color: "white"
-    }
+        fontSize: 28,
+        color: 'white',
+        fontWeight: 'bold',
+        marginTop: 10,
+    },
+    contactImage: {
+        width: 150,
+        height: 150,
+        borderRadius: 75,
+        borderWidth: 3,
+        borderColor: 'white',
+    },
+    contactInfo: {
+        padding: 20,
+    },
+    contactText: {
+        fontSize: 18,
+        color: 'black',
+        paddingVertical: 10,
+    },
 });

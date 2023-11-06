@@ -76,7 +76,12 @@ const Contacts = ({ navigation }) => {
               <TouchableOpacity
                 style={styles.row}
                 onPress={() => {
-                  navigation.navigate('IndividualContact', { contactName: `${item.firstName} ${item.lastName}` });
+                  navigation.navigate('IndividualContact', {
+                    contactName: `${item.firstName} ${item.lastName}`,
+                    email: item.email,           // Assuming 'email' is a field in your worker object
+                    affiliation: item.affiliation, // Assuming 'affiliation' is a field in your worker object
+                    phone: item.phone            // Assuming 'phone' is a field in your worker object
+                  });
                 }}
               >
                 <Text>{`${item.firstName} ${item.lastName}`}</Text>
