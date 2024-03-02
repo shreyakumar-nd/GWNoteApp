@@ -16,8 +16,9 @@ import ResetPassword from "./components/ResetPassword";
 import Profile from "./components/Profile";
 import IndividualContact from "./components/IndividualContact";
 import ContactPage from './components/ContactPage';
-import AddContact from './components/AddContact'
-import Map from './components/Map'
+import AddContact from './components/AddContact';
+import TestPage from './components/TestPage';
+import Map from './components/Map';
 
 // Code to connect Express wrapper to frontend. Doesn't work due to error with dependencies
 // class App extends Component {
@@ -119,6 +120,11 @@ export default function App() {
           options={{ headerShown: false }}
           navigationOptions={{ headerShown: false }}
         />
+        <Stack.Screen 
+          name="TestPage"
+          component={TestPage}
+          options={{ headerShown: false }} 
+          />
         <Stack.Screen
           name="CreateAccount"
           component={CreateAccount}

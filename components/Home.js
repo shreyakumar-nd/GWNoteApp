@@ -14,7 +14,8 @@ export default function Home({ navigation }) {
     { name: "Contacts", key: "1" },
     { name: "Notes", key: "2" },
     { name: "Resources", key: "3" },
-    { name: "Map", key: "4"}
+    { name: "Map", key: "4"},
+    { name: "TestPage", key: "5"}
   ]);
 
   return (
